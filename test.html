@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html><head><title>Welcome to: www.thisriverisopen.com</title>
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC_N7pppB0W5PjwhkcqOGDyGg9RIlKvJqM&sensor=false">
+    </script>
+    <script type="text/javascript">
+      var myLatlng;
+      function initialize() {
+        var myOptions = {
+          center: new google.maps.LatLng(47.85, -121.9077),
+          zoom: 10,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+	var showWaterStyles= 
+	[
+  	  {
+    		featureType: "water",
+    		stylers: [
+      			{ visibility: "on" },
+      			{ invert_lightness: true }
+    		]
+  	  },{
+    		featureType: "poi",
+    		stylers: [
+      			{ visibility: "off" }
+    		]
+  	  },{
+    		featureType: "poi.park",
+    		stylers: [
+      			{ visibility: "on" }
+    		]
+  	  },{
+    		featureType: "transit.line",
+    		stylers: [
+      			{ visibility: "off" }
+    		]
+  	  }
+	]
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            myOptions);
+
+        var SnohomishClosedInTown = [
+            myLatlng = new google.maps.LatLng(47.902995, -122.093124),
+            new google.maps.LatLng(47.875598,-122.084198),
+            new google.maps.LatLng(47.867077,-122.084885),
+            new google.maps.LatLng(47.863853,-122.077332),
+            new google.maps.LatLng(47.857403,-122.087288),
+            new google.maps.LatLng(47.830098,-122.045918)
+        ];
+        var fPath = new google.maps.Polyline({
+            path: SnohomishClosedInTown,
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.5,
+            strokeWeight: 10
+        });
+
+        var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Closed</h1>'+
+            '<div id="bodyContent">'+
+            'below some dam until something else'+
+	    '<br><hr>'+
+	    'Copy and paste from Gov Fishing site with references'+
+	    '<br><hr>'+
+            '<p><a href="http://en.wikipedia.org">http://en.wikipedia.org</a> '+
+            '(last updated June 22, 2009).</p>'+
+            '</div>'+
+            '</div>';
+        
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        var cmarker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: 'Title: River Closed for fishing'
+        });
+        google.maps.event.addListener(cmarker, 'click', function() {
+          infowindow.open(map,cmarker);
+        });
+
+	map.setOptions({styles: showWaterStyles});
+	fPath.setMap(map);
+
+      }
+    </script>
+  </head>
+  <body onload="initialize()">
+    <div id="map_canvas" style="width:100%; height:96%"></div>
+    <!-- footer/banner -->
+	<hr>
+	Powered by <a href='http://conserveware.com'>ConserveWare</a>
+</body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html><head><title>Welcome to: www.thisriverisopen.com</title>
+
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC_N7pppB0W5PjwhkcqOGDyGg9RIlKvJqM&sensor=false">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+        var goldStar = {
+          path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
+          fillColor: "yellow",
+          fillOpacity: 0.8,
+          scale: 1,
+          strokeColor: "gold",
+          strokeWeight: 14
+        };
+        var myOptions = {
+          //center: new google.maps.LatLng(47.6097, -122.3331),
+          center: new google.maps.LatLng(-25.363, 131.044),
+          zoom: 8,
+          icon: goldStar,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(-25.363, 131.044),
+          icon: goldStar,
+          map: map
+        });
+	var showWaterStyles= 
+	[
+  	  {
+    		featureType: "water",
+    		stylers: [
+      			{ visibility: "on" },
+      			{ invert_lightness: true }
+    		]
+  	  },{
+    		featureType: "poi",
+    		stylers: [
+      			{ visibility: "off" }
+    		]
+  	  },{
+    		featureType: "poi.park",
+    		stylers: [
+      			{ visibility: "on" }
+    		]
+  	  },{
+    		featureType: "transit.line",
+    		stylers: [
+      			{ visibility: "off" }
+    		]
+  	  }
+	]
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            myOptions);
+
+	map.setOptions({styles: showWaterStyles});
+	marker.setMap(map);
+      }
+    </script>
+  </head>
+  <body onload="initialize()">
+    <div id="map_canvas" style="width:100%; height:100%"></div>
+
+
+
+
+
+<br><br><br>Powered by <a href='http://conserveware.com'>ConserveWare</a></body></html>
